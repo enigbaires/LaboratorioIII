@@ -5,7 +5,7 @@ GO
 create table Carreras(
     ID varchar(4) not null primary key,
     Nombre varchar(30) not null,
-	"Fecha creacion" date check ("Fecha creacion" <= getdate()),
+	"Fecha creacion" date not null check ("Fecha creacion" <= getdate()),
 	Mail varchar(100) not null,
     Nivel varchar(11) not null check (Nivel = 'Diplomatura' or Nivel = 'Pregrado' or Nivel = 'Grado' or Nivel = 'Posgrado')    
 )
@@ -24,5 +24,5 @@ create table Materias(
     ID int not null primary key identity(1, 1),
     IDCarrera varchar(4) not null foreign key references Carreras(ID),
     Nombre varchar(100) not null,
-    "Carga Horaria" date not null check ("Carga Horaria" <= getdate())
+    "Carga Horaria" int not null check ("Carga Horaria" > 0)
 )
