@@ -2,22 +2,25 @@ CREATE DATABASE Actividad_1_2_1_a_N
 GO
 USE Actividad_1_2_1_a_N
 
--- 
+-- El cliente tiene la necesidad de poseer varias direcciones, por ejemplo Direccion de facturación, de entrega, etc
 
 GO
-CREATE TABLE Clientes(
-  DNI INT NOT NULL PRIMARY KEY,
-  Apellidos VARCHAR(50) NOT NULL,
-  Nombres VARCHAR(50) NOT NULL,
-  Sexo CHAR(1) NOT NULL CHECK(Sexo = 'F' OR Sexo = 'M'),
-  FechaAlta DATE NOT NULL 
+create table Clientes(
+    IdCliente int not null primary key identity(1,1),
+    Apellidos varchar(100) not null,
+    Nombres varchar(100) not null,
+	Nacimiento date not null check (Nacimiento <= getdate()),
+	Mail varchar(100) not null unique,
+    Telefono varchar(20) null
 )
 GO
-CREATE TABLE TInstagram(
-  DNI INT NOT NULL,
-  URL VARCHAR(100) NOT NULL UNIQUE,
-  Usuario VARCHAR(100) NOT NULL UNIQUE,
-  Password VARCHAR(100) NOT NULL,
-  PRIMARY KEY(DNI),
-  FOREIGN KEY (DNI) REFERENCES Clientes(DNI)
+	create table TipoDomicilios(
+    IDTipoDomicilio int primary key identity(1,1),
+	Descripcion varchar(30) not null unique
+)
+GO
+	create table Domicilios(
+    IdCliente int not null foreign key references Clientes(IdCliente),
+	IDTipoDomicilio int not null foreign key references TipoDomicilios(IDTipoDomicilio),
+    Domicilio varchar(30) not null unique
 )

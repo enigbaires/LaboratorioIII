@@ -2,22 +2,27 @@ CREATE DATABASE Actividad_1_2_N_a_N
 GO
 USE Actividad_1_2_N_a_N
 
--- 
+/* Relacion N:N: Estas tablas tienen relacion N:N porque en el juego cada pokemon puede tener uno o mas tipos, 
+asi como estos tipos pueden ser asignados a distintos pokemon */
 
 GO
-CREATE TABLE Clientes(
-  DNI INT NOT NULL PRIMARY KEY,
-  Apellidos VARCHAR(50) NOT NULL,
-  Nombres VARCHAR(50) NOT NULL,
-  Sexo CHAR(1) NOT NULL CHECK(Sexo = 'F' OR Sexo = 'M'),
-  FechaAlta DATE NOT NULL 
+create table pokemon(
+	numero bigint identity(1,1) primary key,
+	nombre varchar(25) not null,
+	descripcion varchar (100) not null,
+	altura decimal not null check (altura > 0),
+	peso decimal not null check(peso > 0),
+	sexo char null
 )
+
 GO
-CREATE TABLE TInstagram(
-  DNI INT NOT NULL,
-  URL VARCHAR(100) NOT NULL UNIQUE,
-  Usuario VARCHAR(100) NOT NULL UNIQUE,
-  Password VARCHAR(100) NOT NULL,
-  PRIMARY KEY(DNI),
-  FOREIGN KEY (DNI) REFERENCES Clientes(DNI)
+create table tipos(
+	idtipo int identity(1,1) primary key,
+	tipo varchar(25) not null
+)
+
+GO
+create table tipo_por_pokemon(
+	numero bigint not null foreign key references pokemon(numero),
+	tipo int not null foreign key references tipos(idtipo)
 )
