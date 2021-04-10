@@ -92,8 +92,6 @@ SELECT RazonSocial, Cuit, Email, TelefonoMovil FROM Clientes WHERE Email IS NULL
 
 -- 24	Listado de razón social, cuit, email, teléfono o celular de aquellos clientes que tengan mail o teléfono o celular .
 
-SELECT RazonSocial, Cuit, Email, 'Fijo: ' + TelefonoFijo + ' Movil: ' + TelefonoMovil AS 'Telefonia' FROM Clientes WHERE Email IS NOT NULL OR TelefonoFijo IS NOT NULL OR TelefonoMovil IS NOT NULL
-
 SELECT RazonSocial, Cuit, Email, TelefonoFijo, TelefonoMovil FROM Clientes WHERE Email IS NOT NULL OR TelefonoFijo IS NOT NULL OR TelefonoMovil IS NOT NULL
 
 -- 25	Listado de razón social, cuit y mail. Si no dispone de mail debe aparecer el texto "Sin mail".
