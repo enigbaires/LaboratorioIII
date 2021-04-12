@@ -56,7 +56,7 @@ SELECT Nombre, Descripcion FROM Proyectos WHERE FechaFin IS NOT NULL
 
 -- 15	Listado con nombre de proyecto y descripción de aquellos proyectos que aún no hayan comenzado.
 
-SELECT Nombre, Costo FROM Proyectos WHERE FechaInicio > GETDATE()
+SELECT Nombre, Descripcion FROM Proyectos WHERE FechaInicio > GETDATE()
 
 -- 16	Listado de clientes cuya razón social comience con letra vocal.
 
