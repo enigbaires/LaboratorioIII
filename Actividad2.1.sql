@@ -98,7 +98,14 @@ SELECT RazonSocial, Cuit, Email, TelefonoFijo, TelefonoMovil FROM Clientes WHERE
 
 SELECT RazonSocial, Cuit, CASE WHEN Email IS NULL THEN 'Sin email' ELSE Email END AS 'Email' FROM Clientes
 
--- 26	Listado de razón social, cuit y una columna llamada Contacto con el mail, si no posee mail, con el número de celular 
+-- 26   Listado de razón social, cuit y una columna llamada Contacto con el mail, si no posee mail, con el número de celular,
+--      si no posee número de celular con el número de teléfono, de lo contrario un texto que diga "Incontactable"
+
+SELECT RazonSocial, Cuit, COALESCE(Email, TelefonoMovil, TelefonoFijo, 'Incontactable') AS 'Contacto' FROM Clientes
+
+-- 27   Listado de razón social, cuit y una columna llamada Contacto con el mail, si no posee mail, con el número de celular 
 --      y si no posee número de celular con un texto que diga "Incontactable".
 
-SELECT RazonSocial, Cuit, CASE WHEN Email IS NOT NULL THEN Email WHEN TelefonoMovil IS NOT NULL THEN TelefonoMovil ELSE 'Incontactable' END AS 'Contacto' FROM Clientes
+SELECT RazonSocial, Cuit, COALESCE(Email, TelefonoMovil, 'Incontactable') AS 'Contacto' FROM Clientes
+
+
