@@ -60,7 +60,7 @@ WHERE PA.Nombre IN('Argentina', 'Italia')
 SELECT M.Nombre AS 'Modulo', M.CostoEstimado, P.Nombre AS 'Proyecto', P.Descripcion AS 'Descripcion Proyecto'
 FROM Modulos AS M
 INNER JOIN Proyectos AS P ON M.IDProyecto = P.ID
-WHERE P.FechaFin IS NOT NULL
+WHERE P.FechaFin <= GETDATE()
 
 -- 9) Listar los nombres de los módulos y el nombre del proyecto de aquellos módulos cuyo tiempo estimado de realización 
 --    sea de más de 100 horas.
@@ -99,7 +99,7 @@ WHERE CL.ID IS NULL AND CO.ID IS NOT NULL
 SELECT P.Nombre AS 'Proyecto', M.Nombre AS 'Modulo', M.Descripcion
 FROM Proyectos AS P
 INNER JOIN Modulos AS M ON P.ID = M.IDProyecto
-WHERE M.Nombre NOT LIKE '%LOGIN%' AND M.Descripcion NOT LIKE '%LOGIN%'
+WHERE M.Nombre LIKE '%LOGIN%' OR M.Descripcion LIKE '%LOGIN%'
 
 -- 14) Listar el nombre del proyecto y el nombre y apellido de todos los colaboradores que hayan realizado algún 
 --     tipo de tarea cuyo nombre contenga  'Programación' o 'Testing'. Ordenarlo por nombre de proyecto de manera ascendente.
@@ -177,4 +177,4 @@ INNER JOIN Modulos AS M ON P.ID = M.IDProyecto
 INNER JOIN Tareas AS T ON M.ID = T.IDModulo
 INNER JOIN Colaboraciones AS CC ON T.ID = CC.IDTarea
 INNER JOIN Colaboradores AS CB ON CC.IDColaborador = CB.ID
-WHERE P.FechaFin IS NULL
+WHERE P.FechaFin <= GETDATE()
